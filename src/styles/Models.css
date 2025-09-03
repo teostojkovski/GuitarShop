@@ -1,0 +1,58 @@
+.content{
+    text-align: center;
+    margin: 5% 0 0 10%;
+}
+
+.heading{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 35%;
+    margin: 0 0 30px 0;
+}
+
+.subheading{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 35%;
+    margin: 0;
+}
+
+.askChat{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 35%;
+    margin: 0;
+}
+
+
+.brandHero{
+    height: 70vh;
+}
+
+.orange{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+}
+
+.brandImg{
+    position: absolute;
+    right: 5%;
+    top: 10%;
+    width: 30%;
+}
+
+.watermark{
+    position: absolute;
+    top: 59%;
+    right: 15%;
+}
+
+.selectionHeading{
+    font-size: 2.7rem;
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
