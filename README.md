@@ -46,3 +46,4 @@ A 3-page React app using Apollo Client and a public GraphQL API to browse guitar
 git clone <your-repo-url>
 cd online-guitar-shop
 npm install
+npm run dev
