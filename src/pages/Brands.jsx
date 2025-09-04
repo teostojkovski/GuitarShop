@@ -14,6 +14,7 @@ import socials from "../assets/socials.png";
 import mail from "../assets/mail.png";
 import location from "../assets/location.png";
 import '../styles/Brands.css';
+import Footer from "../components/Footer";
 
 const Brands = () => {
   const navigate = useNavigate();
@@ -25,9 +26,11 @@ const Brands = () => {
   return (
     <div>
       <section className="landingSection">
-        <img className="logo" src={logo} />;
-        <h1 className="heading">Browse top quality <span>Guitars</span> online</h1>
-        <p className="subheading">Explore 50k+ latest collections of branded guitars online with VibeStrings.</p>
+        <img className="logo" src={logo} />
+        <div className="content">
+          <h1 className="heading">Browse top quality <span>Guitars</span> online</h1>
+          <p className="subheading">Explore 50k+ latest collections of branded guitars online with VibeStrings.</p>
+        </div>
         <img className="landingImg" src={guitarImg} />
         <img className="watermark" src={watermark} />
       </section>
@@ -92,55 +95,7 @@ const Brands = () => {
         </div>
       </section>
 
-      <footer className="footerSection">
-        <div className="footerContent">
-          <div className="footerBrand">
-            <div className="footerLogo">
-              <img src={logo} alt="VibeStrings" className="footerLogoImg" />
-            </div>
-            <div className="contactInfo">
-              <div className="contactItem">
-                <img className="contactIcon" src={mail} />
-                <span>Enquiry@VibeStrings.com</span>
-              </div>
-              <div className="contactItem">
-                <img className="contactIcon" src={location} />
-                <span>San Francisco</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="footerNav">
-            <div className="navColumn">
-              <h3>PAGES</h3>
-              <ul>
-                <li>Store</li>
-                <li>Collections</li>
-                <li>Support</li>
-              </ul>
-            </div>
-            <div className="navColumn">
-              <h3>PRODUCT</h3>
-              <ul>
-                <li>Terms</li>
-                <li>Privacy Policy</li>
-                <li>Copyright</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="footerSocial">
-            <h3>FOLLOW US</h3>
-            <div className="socialIcons">
-              <img src={socials} />
-            </div>
-          </div>
-        </div>
-
-        <div className="footerCopyright">
-          <p>© 2022 Copyright.VibeStrings</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };

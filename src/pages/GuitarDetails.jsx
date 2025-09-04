@@ -1,64 +1,101 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client/react";
-import { GET_MODEL_DETAILS } from "../graphql/queries"; // adjust path
+import { GET_MODEL_DETAILS } from "../graphql/queries";
+import { useParams } from "react-router-dom";
+import Footer from "../components/Footer";
+import logo from "../assets/logo.png";
+import watermark from "../assets/watermark.png";
+import orange from "../assets/orangeBackground.png";
+import '../styles/GuitarDetails.css';
 
-const GuitarDetails = ({ brandId, modelId }) => {
-  const [musicianIndex, setMusicianIndex] = useState(0); // track how many musicians to show
-  const [activeTab, setActiveTab] = useState("specs"); // "specs" or "musicians"
+const GuitarDetails = () => {
+  const { brandId, modelId } = useParams();
+  const [musicianIndex, setMusicianIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState("specs");
+
+  console.log('GuitarDetails - brandId:', brandId, 'modelId:', modelId);
 
   const { data, loading, error } = useQuery(GET_MODEL_DETAILS, {
     variables: { brandId, modelId },
   });
 
-  if (loading) return <p>Loading details...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  console.log('GuitarDetails - data:', data, 'loading:', loading, 'error:', error);
+
+  if (loading) return <div style={{ padding: '20px' }}><p>Loading details...</p></div>;
+  if (error) return <div style={{ padding: '20px' }}><p>Error: {error.message}</p></div>;
+  if (!data || !data.findUniqueModel) return <div style={{ padding: '20px' }}><p>No model data found</p></div>;
 
   const model = data.findUniqueModel;
+  console.log('GuitarDetails - model:', model);
 
   const showMoreMusicians = () => {
     setMusicianIndex((prev) => prev + 2);
   };
 
-  return (
-    <div>
-      <h1>{model.name}</h1>
-      <p>Type: {model.type}</p>
-      <p>Price: ${model.price}</p>
+  return (<>
+    <section className="brandHero">
+      <button className="homeButton" onClick={() => navigate(`/models/${brandId}`)}>Back to List</button>
+      <img className="logo" src={logo} />
+      <div className="content">
+        <h1 className="guitarName">{model.name}</h1>
+      </div>
+      <img className="orange" src={orange} />
+      <img className="brandImg" src={model.image} />
+      <img className="watermark" src={watermark} />
+    </section>
+    <div style={{ padding: '20px', backgroundColor: 'white', minHeight: '80vh' }}>
 
-      {/* Tabs */}
-      <div>
-        <button onClick={() => setActiveTab("specs")}>Specs</button>
-        <button onClick={() => setActiveTab("musicians")}>Musicians</button>
+
+      <div className="tabs">
+        <button
+          className={`specs ${activeTab === "specs" ? "active" : ""}`}
+          onClick={() => setActiveTab("specs")}
+        >
+          Specification
+        </button>
+
+        <button
+          className={`musicians ${activeTab === "musicians" ? "active" : ""}`}
+          onClick={() => setActiveTab("musicians")}
+        >
+          Who plays it?
+        </button>
       </div>
 
       {activeTab === "specs" && (
         <div>
-          <p>Body Wood: {model.specs.bodyWood}</p>
-          <p>Neck Wood: {model.specs.neckWood}</p>
-          <p>Fingerboard: {model.specs.fingerboardWood}</p>
-          <p>Pickups: {model.specs.pickups}</p>
-          <p>Tuners: {model.specs.tuners}</p>
-          <p>Scale Length: {model.specs.scaleLength}</p>
-          <p>Bridge: {model.specs.bridge}</p>
+          <p className="descriptionModel">{model.description}</p>
+          <ul className="specsList">
+            <li>Body Wood: {model.specs?.bodyWood || 'N/A'}</li>
+            <li>Neck Wood: {model.specs?.neckWood || 'N/A'}</li>
+            <li>Fingerboard: {model.specs?.fingerboardWood || 'N/A'}</li>
+            <li>Pickups: {model.specs?.pickups || 'N/A'}</li>
+            <li>Tuners: {model.specs?.tuners || 'N/A'}</li>
+            <li>Scale Length: {model.specs?.scaleLength || 'N/A'}</li>
+            <li>Bridge: {model.specs?.bridge || 'N/A'}</li>
+          </ul>
         </div>
       )}
 
       {activeTab === "musicians" && (
-        <div>
-          {model.musicians.slice(0, musicianIndex + 2).map((musician, idx) => (
-            <div key={idx}>
+        <div className="musiciansContainer">
+          {model.musicians?.slice(0, musicianIndex + 2).map((musician, idx) => (
+            <div key={idx} className="musicianCard">
+              <img src={musician.musicianImage} alt={musician.name} />
               <p>{musician.name}</p>
-              <p>Bands: {musician.bands.join(", ")}</p>
-              <img src={musician.musicianImage} alt={musician.name} width={100} />
+              <p>Bands: {musician.bands?.join(", ") || 'N/A'}</p>
             </div>
           ))}
-          {musicianIndex + 2 < model.musicians.length && (
-            <button onClick={showMoreMusicians}>Show More</button>
+          {model.musicians && musicianIndex + 2 < model.musicians.length && (
+            <button onClick={showMoreMusicians} style={{ marginTop: '20px', padding: '10px 15px', borderRadius: '5px', border: 'none', backgroundColor: 'orangered', color: 'white', cursor: 'pointer' }}>
+              Show More
+            </button>
           )}
         </div>
       )}
     </div>
-  );
+    <Footer />
+  </>);
 };
 
 export default GuitarDetails;
