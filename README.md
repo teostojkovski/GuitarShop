@@ -1,12 +1,49 @@
-# React + Vite
+# Online Guitar Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A 3-page React app using Apollo Client and a public GraphQL API to browse guitar brands, explore models with search/filters, and view detailed specification and musicians.
 
-Currently, two official plugins are available:
+**API:** https://graphql-api-brown.vercel.app/api/graphql
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Page 1 – Guitar Brands**
+  - Fetch & list all brands from the GraphQL API
+  - Selecting a brand navigates to models
+
+- **Page 2 – Guitar Models**
+  - Lists models for the selected brand
+  - **Search** by model name
+  - **Filter** by guitar type (e.g., Electric, Acoustic, Bass)
+  - Click a model to open details
+
+- **Page 3 – Guitar Details (Bonus)**
+  - **Tabs:** Specs | Musicians
+  - **Specs:** show all available fields
+  - **Musicians:** show 2 at a time
+  
+- **UX:** Loading and friendly error states across all pages.
+
+---
+
+## Tech Stack
+
+- **React**
+- **Apollo Client**
+- **React Router**
+- **CSS**
+
+---
+
+## Getting Started
+
+### Prerequisites
+- **Node.js ≥ 18** and **npm** (or **pnpm**/**yarn**)
+
+### 1) Clone & Install
+```bash
+git clone <your-repo-url>
+cd online-guitar-shop
+npm install
+npm run dev
