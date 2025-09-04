@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import { GET_MODEL_DETAILS } from "../graphql/queries";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
 import watermark from "../assets/watermark.png";
@@ -10,6 +10,7 @@ import '../styles/GuitarDetails.css';
 
 const GuitarDetails = () => {
   const { brandId, modelId } = useParams();
+  const navigate = useNavigate();
   const [musicianIndex, setMusicianIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("specs");
 
